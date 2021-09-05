@@ -16,7 +16,6 @@ github:
   prebuilds:
     branches: true
     pullRequestsFromForks: true
-    addLabel: prebuilt-in-gitpod
 vscode:
   extensions:
     - hbenl.vscode-test-explorer@2.15.0:koqDUMWDPJzELp/hdS/lWw==
