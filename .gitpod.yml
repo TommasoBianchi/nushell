@@ -1,14 +1,16 @@
 image:
   file: .gitpod.Dockerfile
 tasks:
+  - name: Rustup
+    init: rustup default stable && gp sync-done rustup
   - name: Clippy
-    init: cargo clippy --all --features=stable -- -D clippy::result_unwrap_used -D clippy::option_unwrap_used
+    init: gp sync-await rustup && cargo clippy --all --features=stable -- -D clippy::result_unwrap_used -D clippy::option_unwrap_used
   - name: Testing
-    init: cargo test --all --features=stable
+    init: gp sync-await rustup && cargo test --all --features=stable
   - name: Build
-    init: cargo build --features=stable
+    init: gp sync-await rustup && cargo build --features=stable
   - name: Nu
-    init: cargo install --path . --features=stable
+    init: gp sync-await rustup && cargo install --path . --features=stable
     command: nu
 github:
   prebuilds:
