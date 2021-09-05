@@ -644,6 +644,8 @@ impl Shell for FilesystemShell {
                 ));
             }
 
+            println!("{:?}", target);
+
             let path = path.join(&target.item);
             match glob::glob_with(
                 &path.to_string_lossy(),
@@ -653,7 +655,10 @@ impl Shell for FilesystemShell {
                 },
             ) {
                 Ok(files) => {
+                    let mut empty_match = true;
                     for file in files {
+                        println!("{:?}", file);
+                        empty_match = false;
                         match file {
                             Ok(ref f) => {
                                 // It is not appropriate to try and remove the
@@ -677,6 +682,10 @@ impl Shell for FilesystemShell {
                             }
                         }
                     }
+                    // If there no matches, then add the original item
+                    if empty_match {
+                        all_targets.entry(PathBuf::from(&path)).or_insert_with(|| target.tag.clone());
+                    }
                 }
                 Err(e) => {
                     return Err(ShellError::labeled_error(
@@ -688,13 +697,7 @@ impl Shell for FilesystemShell {
             };
         }
 
-        if all_targets.is_empty() && !_force {
-            return Err(ShellError::labeled_error(
-                "No valid paths",
-                "no valid paths",
-                name_tag,
-            ));
-        }
+        println!("{:?}", all_targets);
 
         Ok(all_targets
             .into_iter()
