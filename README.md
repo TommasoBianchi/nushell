@@ -39,7 +39,7 @@ You can also find information on more specific topics in our [cookbook](https://
 
 Try it in Gitpod.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/nushell/nushell)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 ## Installation
 
